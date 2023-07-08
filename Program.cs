@@ -1,5 +1,6 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
+using RoutedEventArgs = Avalonia.Interactivity.RoutedEventArgs;
 
 class MainClass {
     public static void Main(string[] args) {
@@ -20,13 +21,41 @@ class MainClass {
         win.Width = 800;
         win.Height = 600;
 
+        var grid = new Grid();
+        win.Content = grid;
+
+        grid.HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center;
+        grid.VerticalAlignment   = Avalonia.Layout.VerticalAlignment.Center;
+
+        // Define grid rows
+        { var tmp_rd = new RowDefinition();
+          tmp_rd.Height = GridLength.Auto;
+          grid.RowDefinitions.Add(tmp_rd); }
+
+        { var tmp_rd = new RowDefinition();
+          tmp_rd.Height = GridLength.Auto;
+          grid.RowDefinitions.Add(tmp_rd); }
+
         var text = new Label();
-        win.Content = text;
+        grid.Children.Add(text);
+        text.SetValue(Avalonia.Controls.Grid.RowProperty, 0);
 
         text.Content = "Hello from C#!";
-        text.HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center;
-        text.VerticalAlignment = Avalonia.Layout.VerticalAlignment.Center;
-        text.FontSize = 72;
+        text.FontSize = 64;
+        text.Padding = new Thickness(0, 20);
+
+        var btn = new Button();
+        grid.Children.Add(btn);
+        btn.SetValue(Avalonia.Controls.Grid.RowProperty, 1);
+
+        btn.Content = "Click Me!";
+        btn.FontSize = 48;
+        btn.HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center;
+        btn.Padding = new Thickness(50, 20);
+
+        btn.Click += new System.EventHandler<RoutedEventArgs>( (object sender, RoutedEventArgs e) => {
+            text.Content = "Clicked a button!";
+        } );
 
         win.Show();
         app.Run(win);
