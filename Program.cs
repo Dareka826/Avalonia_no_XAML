@@ -4,7 +4,7 @@ using Avalonia.Controls;
 class MainClass {
     public static void Main(string[] args) {
         AppBuilder
-            .Configure<Avalonia.Application>()
+            .Configure<Application>()
             .UsePlatformDetect()
             .Start(AppMain, args);
     }
