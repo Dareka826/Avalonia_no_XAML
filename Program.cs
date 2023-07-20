@@ -53,9 +53,9 @@ class MainClass {
         btn.HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center;
         btn.Padding = new Thickness(50, 20);
 
-        btn.Click += new System.EventHandler<RoutedEventArgs>( (object sender, RoutedEventArgs e) => {
+        btn.Click += (object sender, RoutedEventArgs e) => {
             text.Content = "Clicked a button!";
-        } );
+        };
 
         win.Show();
         app.Run(win);
